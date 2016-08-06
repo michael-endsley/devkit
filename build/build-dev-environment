@@ -1,0 +1,12 @@
+#!/bin/bash
+
+organization="lumerit"
+
+# Read lines from stdin into variable $repos, from file
+mapfile -t repos < ../repos.list
+
+for repo in $repos
+do
+  echo "Cloning $repo..."
+  git ls-remote "git@github.com:/$organization/$repo.git" HEAD
+done
