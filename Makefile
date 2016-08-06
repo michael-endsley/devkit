@@ -3,7 +3,7 @@
 .PHONY: dev ops
 
 dev:
-	./build/build-dev-environment.sh
+	/bin/bash ./build/build-dev-environment
 
 ops:
-	./build/build-ops-environment.sh
+	/bin/bash ./build/build-ops-environment

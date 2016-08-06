@@ -1,12 +1,20 @@
 #!/bin/bash
 
-organization="lumerit"
+# Check whether a variable is set, and if not, prompt for
+# the github user/org name you want to be pulling repos from.
+[[ -v github_user  ]] || read -p "Github user/organization name: " github_user
+cloning_destination="$HOME/devkit-example"
+
+# Make the repos directory into which everything will be cloned.
+# Do not error if the directory already exists.
+mkdir --parent $cloning_destination
 
 # Read lines from stdin into variable $repos, from file
-mapfile -t repos < ../repos.list
+mapfile -t repos < repos.list
 
 for repo in $repos
 do
   echo "Cloning $repo..."
-  git ls-remote "git@github.com:/$organization/$repo.git" HEAD
+  origin="git@github.com:/$github_user/$repo.git"
+  git clone $origin $cloning_destination/$repo
 done
