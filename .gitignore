@@ -1,2 +1,1 @@
-config/.devkitcfg
-config/.devkitcfg.bak
+*.devkitcfg*
