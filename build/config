@@ -1,0 +1,40 @@
+#!/bin/bash
+
+## Define all of the ENV variables here for other scripts to use
+## Write all of these variables to a file, to be sourced where needed
+
+current_dir="${0%/*}"
+config_file="${current_dir}/../config/.devkitcfg"
+
+# Source existing devkit ENV variables, if any
+if [ -f $config_file ]
+then
+  . $config_file
+fi
+
+read -p "Github user/organization name [$DEVKIT_GITHUB_USER]: " github_user
+read -p "App/repo cloning destination [$DEVKIT_REPOS_PATH]: " repos_path
+
+declare -A envfile=(["DEVKIT_GITHUB_USER"]="$github_user"
+                    # Below, expand $repos_path to it's full path if tilde
+                    ["DEVKIT_REPOS_PATH"]="${repos_path/#\~/$HOME}")
+
+# Back up the config file in case recovery functionality is implemented,
+# but overwrite any previous .bak. Doing this after prompts in case
+# user quits in the middle of prompts, so the previous file would remain.
+if [ -f $config_file ]
+then
+  mv -f $config_file $config_file.bak
+fi
+
+# Echo the newly set environment variable to a file if its value isn't empty,
+# otherwise echo the old environment variable back to the file
+for key in "${!envfile[@]}"
+do
+  if ! [[ -z "${envfile["$key"]}" ]]
+  then
+    echo "$key="${envfile["$key"]}"" >> $config_file
+  else
+    echo "$key=${!key}" >> $config_file
+  fi
+done
