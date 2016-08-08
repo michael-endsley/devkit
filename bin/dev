@@ -2,11 +2,12 @@
 
 # Define global variables first in case any sourced scripts need them
 current_dir="${0%/*}"
-config_file="${current_dir}/../config/.devkitcfg"
+devkit_root="${current_dir}/.."
+config_file="${devkit_root}/config/.devkitcfg"
 target=$2
 
 source $config_file
-source $current_dir/tasks
+source $devkit_root/build/tasks
 
 # Function to check whether $2 (target) is empty, exit if it is
 check_for_target() {
