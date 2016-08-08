@@ -1,30 +1,53 @@
 #!/bin/bash
 
+# Define global variables first in case any sourced scripts need them
 current_dir="${0%/*}"
 config_file="${current_dir}/../config/.devkitcfg"
+target=$2
 
 source $config_file
 source $current_dir/tasks
 
-target=$2
-repos_path="$DEVKIT_REPOS_PATH"
-
 # Function to check whether $2 (target) is empty, exit if it is
 check_for_target() {
-  ! [[ -z $target ]] || { echo $"Usage: $0 {$task} [target]"; exit; }
+  ! [[ -z $target ]] || { echo $"Usage: $0 {$task} [service]"; exit; }
 }
 
 case "$1" in
   start)
     task="start"
     check_for_target
+    echo $target
     start_service
     ;;
   stop)
     task="stop"
     check_for_target
+    echo $target
     stop_service
     ;;
+  restart)
+    task="restart"
+    check_for_target
+    restart_service
+    ;;
+  build)
+    task="build"
+    case "$2" in
+      all)
+        # build_core
+        echo "[build all] has not been implemented yet"
+        ;;
+      *)
+        check_for_target
+        build_service
+    esac
+    ;;
+  shell)
+    task="shell"
+    check_for_target
+    get_shell
+    ;;
   *)
-    echo $"Usage: $0 {start|stop} [target]"
+    echo $"Usage: $0 {start|stop|restart|build|shell} [service]"
 esac

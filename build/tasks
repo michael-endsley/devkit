@@ -3,22 +3,25 @@
 # A library of functions to be called by the 'dev' script to accomplish
 # various development-related tasks
 
+repos_path="$DEVKIT_REPOS_PATH"
+compose_file="$repos_path/$target/docker-compose.yml"
+
 start_service() {
-  docker-compose -f $repos_path/$target/docker-compose.yml up
+  docker-compose -f $compose_file up
 }
 
 stop_service() {
-  docker-compose -f $repos_path/$target/docker-compose.yml stop
+  docker-compose -f $compose_file stop
 }
 
 # Restart a single service
 restart_service() {
-  true
+  docker-compose -f $compose_file restart
 }
 
 # Build a single service
 build_service() {
-  true
+  docker-compose -f $compose_file build
 }
 
 # Build the core services necessary for others' operation
@@ -26,13 +29,12 @@ build_core() {
   true
 }
 
-# Import developer data into a service's local database
-import_database() {
-  true
+# Get a shell in a running docker service container
+get_shell() {
+  docker-compose -f $compose_file exec app /bin/sh
 }
 
 # Update devkit to a newer version
 update() {
   true
 }
-
