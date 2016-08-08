@@ -1,9 +1,15 @@
 #!/bin/bash
 
+current_dir="${0%/*}"
+config_file="${current_dir}/../config/.devkitcfg"
+
+source $config_file
+
 # Check whether a variable is set, and if not, prompt for
 # the github user/org name you want to be pulling repos from.
-[[ -v github_user  ]] || read -p "Github user/organization name: " github_user
-cloning_dest="$HOME/devkit-example"
+
+github_user="$DEVKIT_GITHUB_USER"
+cloning_dest="$DEVKIT_REPOS_PATH/devkit"
 
 # Make the repos directory into which everything will be cloned.
 # Do not error if the directory already exists.
@@ -12,7 +18,7 @@ mkdir --parent $cloning_dest
 # Read lines from stdin into variable $repos, from file
 mapfile -t repos < repos.list
 
-for repo in ${repos[*]}
+for repo in ${repos[@]}
 do
   echo "Cloning $repo..."
   git clone "git@github.com:/${github_user}/${repo}.git" \
