@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# A library of functions to be called by the 'dev' script to accomplish
+# various development-related tasks
+
+start_service() {
+  docker-compose -f $repos_path/$target/docker-compose.yml up
+}
+
+stop_service() {
+  docker-compose -f $repos_path/$target/docker-compose.yml stop
+}
+
+# Restart a single service
+restart_service() {
+  true
+}
+
+# Build a single service
+build_service() {
+  true
+}
+
+# Build the core services necessary for others' operation
+build_core() {
+  true
+}
+
+# Import developer data into a service's local database
+import_database() {
+  true
+}
+
+# Update devkit to a newer version
+update() {
+  true
+}
+
