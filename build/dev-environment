@@ -27,7 +27,5 @@ do
     "${cloning_dest}/${repo}"
 done
 
-echo "export PATH=\"${bin_dir}:\$PATH\"" >> $HOME/.bashrc
-
-echo -e "$(tput setaf 3)If you are not using Bash, add ${bin_dir} to\n
-your PATH, otherwise carry on.$(tput sgr0)"
+echo -e "$(tput setaf 3)Add ${bin_dir} to your PATH in order to use the \n
+'dev' and 'ops' executables.$(tput sgr0)"
