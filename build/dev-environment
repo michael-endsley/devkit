@@ -3,7 +3,7 @@
 # Move these to their own sourced file as a function
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 bin_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../bin" && pwd )"
-config_file="${current_dir}/../config/.devkitcfg"
+config_file="${HOME}/.devkitcfg"
 
 source $config_file
 

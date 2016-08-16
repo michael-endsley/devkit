@@ -3,7 +3,7 @@
 # Define global variables first in case any sourced scripts need them
 current_dir="${0%/*}"
 devkit_root="${current_dir}/.."
-config_file="${devkit_root}/config/.devkitcfg"
+config_file="${HOME}/.devkitcfg"
 target=$2
 
 source $config_file

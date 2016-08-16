@@ -3,8 +3,7 @@
 ## Define all of the ENV variables here for other scripts to use
 ## Write all of these variables to a file, to be sourced where needed
 
-current_dir="${0%/*}"
-config_file="${current_dir}/../config/.devkitcfg"
+config_file="${HOME}/.devkitcfg"
 
 # Source existing devkit ENV variables, if any
 if [ -f $config_file ]
