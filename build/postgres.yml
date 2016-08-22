@@ -1,0 +1,10 @@
+version: '2'
+services:
+  postgres:
+    image: postgres9.5
+    ports:
+      - '5432'
+    volumes:
+      - '$HOME/.pgdata:/var/lib/postgresql/data/pgdata'
+    environment:
+      PGDATA: 'var/lib/postgresql/data/pgdata'

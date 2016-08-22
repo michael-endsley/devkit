@@ -1,0 +1,28 @@
+# This is a sample master.yml file. It is a place to centralize definitions for
+# services which are used by all of the apps, and then calls all configurations
+# for each app and links them to the services they need.
+
+version: '2'
+services:
+  postgres:
+    extends:
+      file: postgres.yml
+      service: postgres
+  app1:
+    extends:
+      file: app-directory/docker-compose.yml
+      service: app1
+    links:
+      - postgres
+  app2:
+    extends:
+      file: app-directory/docker-compose.yml
+      service: app2
+    links:
+      - postgres
+  app3:
+    extends:
+      file: app-directory/docker-compose.yml
+      service: app3
+    links:
+      - postgres
